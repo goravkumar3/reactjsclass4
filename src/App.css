@@ -6,7 +6,20 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  height: auto;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+.slideimages{
+  width: 100%;
+}
+.slider img{
+  width: 100%;
+  height: 400px;
+}
+.next{
+  cursor: pointer;
+}
+.prev{
+  cursor: pointer;
 }
