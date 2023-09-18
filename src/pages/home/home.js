@@ -3,14 +3,25 @@ import Slide from '../../component/slider/slide';
 function Home() {
   let [data,setData]=useState([])
   let fectdata=async()=>{
-    fetch('https://dummyjson.com/products/1')
- .then(async res => {
-  let getdata=await res.json()
-  let arrdata=[getdata]
-  setData(arrdata)
-  console.log(data)
- })
-.then(json => console.log(json))
+    const url = 'https://imdb8.p.rapidapi.com/auto-complete?q=game%20of%20thr';
+const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '9e9e05ed9fmsh20a1a9eb7cd04d0p183544jsn5e114b8fb562',
+		'X-RapidAPI-Host': 'imdb8.p.rapidapi.com'
+	}
+};
+
+try {
+	const response = await fetch(url, options);
+	const result = await response.json();
+	console.log(result);
+  let arrdata=[result]
+    setData(arrdata)
+    console.log(data)
+} catch (error) {
+	console.error(error);
+}
             
   }
   useEffect(()=>{
@@ -20,17 +31,19 @@ function Home() {
     <div>
       <h1>Home</h1>
        <Slide  />
-       {data.map((value)=>{
-        return(<div key={value.id}>
-          {
-            value.images.map((v)=>{
-              return<img src={v} alt=''/>
-            })
-          }
-            <h1>{value.title}</h1>
-            <p>{value.description}</p>
-        </div>)
-       })}
+       {
+        data.map((v)=>{
+          return(
+            <>
+            {v.d.map((val)=>{
+              return(
+              <img src='' alt={val.l} />
+              )
+            })}
+            </>
+          )
+        })
+       }
     </div>
   )
 }
